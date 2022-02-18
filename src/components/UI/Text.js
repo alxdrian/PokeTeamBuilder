@@ -24,7 +24,6 @@ export const HeadingSmall = styled.h2`
 `;
 
 export const HeadingMedium = styled.h3`
-  font-family: 'Lato', sans-serif;
   font-size: 20px;
   line-height: 32px;
   color: #333333;

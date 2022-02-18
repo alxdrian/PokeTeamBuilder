@@ -1,19 +1,37 @@
-import styled from "@emotion/styled"
+import styled from "@emotion/styled";
 
-const Bttn = styled.button`
-  background: #E3D512;
-  border-radius: 30px;
-  text-align: center;
+export const Button = styled.button`
+  display: flex;
+  gap: 5px;
+  padding: 5px 10px;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
   border: none;
+  border-radius: 8px;
+  color: #ffff;
   cursor: pointer;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.3);
 
-  &:focus {
-    outline: none;
+  svg {
+    width: 20px;
+    height: 20px;
   }
-`
+`;
 
-export function Button(props) {
-  return (
-    <Bttn onClick={props.fnc}>{props.children}</Bttn>
-  )
-}
+export const IconButton = styled(Button)`
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  position: absolute;
+  padding: 0;
+
+  @media (max-width: 768px) {
+    height: 20px;
+    width: 20px;
+  }
+
+  :hover {
+    background-color: #f6f6f9a1;
+  }
+`;

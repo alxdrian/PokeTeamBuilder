@@ -4,8 +4,10 @@ import { ContentXSmall, HeadingSmall } from './UI/Text'
 import { Card } from './UI/Card'
 import { colorTypes } from '../helpers/colorTypes'
 import { getPokemon } from '../services/pokemonFetch'
+import { PlusIcon } from './UI/Icons'
+import { IconButton } from './UI/Button'
 
-export function PokeEntry ({name}) {
+export function PokeEntry ({name,addToTeam}) {
   const [data, setData] = useState({})
 
   useEffect(() => {
@@ -16,6 +18,10 @@ export function PokeEntry ({name}) {
     fetchData()
   }, []);
 
+  function handleAddToTeam() {
+    addToTeam(data)
+  }
+
   return (
     <DexCard>
       {data.sprites ? 
@@ -24,6 +30,14 @@ export function PokeEntry ({name}) {
         </PokeImage> : <div></div>
       }
       <Description>
+        {data.types && 
+        <AddToTeamButton 
+          color={data.types[0].type.name}
+          onClick={handleAddToTeam}
+        >
+          <PlusIcon/>
+        </AddToTeamButton>
+        }
         {data.species && <HeadingSmall>{data.species.name}</HeadingSmall>}
         <TypesList>
           {data.types && data.types.map(type => (
@@ -44,9 +58,15 @@ const DexCard = styled(Card)`
   @media (min-width: 768px) {
     width: 140px;
   }
+
+  :hover {
+    cursor: pointer;
+    background: rgb(255 255 255 / 100%);
+    box-shadow: 0 80px 100px 0 rgba(0, 0, 0, 0.5), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+  }
 `
 
-const PokeImage = styled.div`
+export const PokeImage = styled.div`
   border-radius: 8px 8px 0 0;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
   background: ${props => props.color && colorTypes(props.color)};
@@ -70,7 +90,8 @@ const Description = styled.div`
   flex-direction: column;
   padding: 3px;
   gap: 3px;
-
+  position: relative;
+  
   @media (min-width: 768px) {
     gap: 5px;
     padding: 5px;
@@ -103,3 +124,18 @@ const Type = styled.div`
     height: 12px;
   }
 `
+
+const AddToTeamButton = styled(IconButton)`
+  background: ${props => props.color && colorTypes(props.color)};
+  right: 5px;
+  top: -15px;
+
+  @media (max-width: 768px) {
+    right: 3px;
+    top: -12px;
+  }
+
+  :hover {
+    color: ${props => props.color && colorTypes(props.color)};
+  }
+`;
