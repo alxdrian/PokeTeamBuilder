@@ -10,7 +10,14 @@ export const Page = styled.div`
 
 export const PageContent = styled.div`
   margin-top: 70px;
-  max-width: 1200px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+`;
+
+export const PageSection = styled.div`
+  max-width: 800px;
   display: flex;
   flex-direction: column;
   align-items: center;

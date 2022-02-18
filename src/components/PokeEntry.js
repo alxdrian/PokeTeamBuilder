@@ -7,7 +7,7 @@ import { getPokemon } from '../services/pokemonFetch'
 import { PlusIcon } from './UI/Icons'
 import { IconButton } from './UI/Button'
 
-export function PokeEntry ({name,addToTeam}) {
+export function PokeEntry ({name,addToTeam, setSelectedPokemon}) {
   const [data, setData] = useState({})
 
   useEffect(() => {
@@ -16,6 +16,10 @@ export function PokeEntry ({name,addToTeam}) {
       setData(pokemon)
     }
     fetchData()
+
+    return {
+      data
+    }
   }, []);
 
   function handleAddToTeam() {
@@ -23,7 +27,9 @@ export function PokeEntry ({name,addToTeam}) {
   }
 
   return (
-    <DexCard>
+    <DexCard
+      onClick={() => setSelectedPokemon(data)}
+    >
       {data.sprites ? 
         <PokeImage color={data.types[0].type.name}>
           {data.sprites && <img src={data.sprites.other["official-artwork"].front_default} alt={name}/>}
@@ -85,19 +91,19 @@ export const PokeImage = styled.div`
   }
 `
 
-const Description = styled.div`
+export const Description = styled.div`
   display: flex;
   flex-direction: column;
   padding: 3px;
   gap: 3px;
   position: relative;
-  
+
   @media (min-width: 768px) {
     gap: 5px;
     padding: 5px;
   }
 `
-const TypesList = styled.div`
+export const TypesList = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -108,7 +114,7 @@ const TypesList = styled.div`
   }
 `
 
-const Type = styled.div`
+export const Type = styled.div`
   width: 40px;
   height: 8px;
   box-shadow: inset 0px -2px 0px rgba(0, 0, 0, 0.18);

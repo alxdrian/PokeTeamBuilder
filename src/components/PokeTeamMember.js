@@ -46,7 +46,7 @@ const MemberCard = styled(Card)`
 const ImageMember = styled(PokeImage)`
   img {
     height: 100%;
-    width: 80%;s
+    width: 80%;
   }
 `;
 
