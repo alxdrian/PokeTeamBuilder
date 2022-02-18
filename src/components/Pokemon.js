@@ -1,25 +1,66 @@
 import styled from '@emotion/styled'
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 import { HeadingSmall } from './UI/Text'
 import { colorTypes } from '../helpers/colorTypes'
-import { getAllPokemon } from '../services/pokemonFetch'
+import { getPokemon } from '../services/pokemonFetch'
+
+function Pokemon ({name}) {
+  const [data, setData] = useState({})
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const pokemon = await getPokemon(name)
+      setData(pokemon)
+    }
+    fetchData()
+  }, []);
+
+  return (
+    <Card>
+      {data.sprites ? 
+        <PokeImage color={data.types[0].type.name}>
+          {data.sprites && <img src={data.sprites.other["official-artwork"].front_default} alt={name}/>}
+        </PokeImage> : <div></div>
+      }
+      <Description>
+        {data.species && <HeadingSmall>{data.species.name}</HeadingSmall>}
+        <TypesList>
+          {data.types && data.types.map(type => (
+            <Type key={type.type.name} color={type.type.name}>
+              {type.type.name}
+            </Type>
+          ))}
+        </TypesList>    
+      </Description>
+    </Card>
+  )
+}
+
+export default Pokemon;
 
 const Card = styled.div`
   background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
-  margin: 0 auto;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  max-width: 130px;
+  width: 130px;
+  max-height: 140px;
 `
 
 const PokeImage = styled.div`
-  height: 90px;
-  width: 100%;
   border-radius: 8px 8px 0 0;
-  object-fit: cover;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
   background: ${props => props.color && colorTypes(props.color)};
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+
+  img {
+    height: 90px;
+    width: 100%;
+    object-fit: contain;
+  }
 `  
 
 const Description = styled.div`
@@ -43,24 +84,5 @@ const Type = styled.div`
   font-weight: 600;
   text-transform: uppercase;
   text-align: center;
-  color: #fff;
-  background: ${props => props.type && colorTypes(props.type)};
+  background: ${props => props.color && colorTypes(props.color)};
 `
-
-function Pokemon ({name, types}) {
-  return (
-    <Card>
-      <PokeImage color={types[0]}/>
-      <Description>
-        <HeadingSmall>{name}</HeadingSmall>
-        <TypesList>
-          {types && types.map(type => 
-            <Type key={`${name}${type}`} type={type}>{type}</Type>
-          )}
-        </TypesList>    
-      </Description>
-    </Card>
-  )
-}
-
-export default Pokemon;

@@ -1,30 +1,45 @@
 import { useState, useEffect } from "react";
+import { PokemonList } from "../components/Container";
 import Pokemon from "../components/Pokemon";
-import { getAllPokemon, getPokemon } from "../services/pokemonFetch";
+import { Button } from "../components/UI/Button";
+import { getAllPokemon} from "../services/pokemonFetch";
 
 function Home() {
   const [pokemonData, setPokemonData] = useState([]);
+  const [pagination, setPagination] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
-      const pokemon = await getAllPokemon()
-      const allData = []
-      pokemon.map(async poke => {
-        const data = await getPokemon(poke.name)
-        return allData.push(data)
-      })
-      setPokemonData(allData)
+      const pokemons = await getAllPokemon()
+      setPokemonData(pokemons)
     }
     fetchData()
   }, [])
 
+  function handleNext() {
+    pagination + 20 < 900 && setPagination(pagination + 20)
+  }
+
+  function handlePrev() {
+    pagination > 0 && setPagination(pagination - 20)
+  }
+
   return (
-    <div>
-      <Pokemon
-        name="Bulbasaur"
-        types={["grass", "fighting"]}
-      />
-    </div>
+    <>
+      <div>
+        <Button fnc={handlePrev}>atras</Button>
+        <Button fnc={handleNext}>siguiente</Button>
+        <div>{pagination}</div>
+      </div>
+      <PokemonList>
+        {pokemonData.slice(pagination, pagination + 20).map(pokemon => (
+          <Pokemon
+            key={pokemon.name}
+            name={pokemon.name}
+            />
+        ))}
+      </PokemonList>
+    </>
   )
 }
 

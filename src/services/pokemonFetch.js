@@ -3,7 +3,7 @@ import axios from 'axios';
 axios.defaults.baseURL = 'https://pokeapi.co/api/v2/';
 
 export const getAllPokemon = () => {
-  return axios.get('pokemon?limit=1126')
+  return axios.get('pokemon?limit=898')
     .then(res => {
       return res.data.results
     })

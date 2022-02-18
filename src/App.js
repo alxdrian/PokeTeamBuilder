@@ -9,13 +9,6 @@ const cssGlobal = css`
     font-family: 'Lato', sans-serif;
     margin: 0;
   }
-  
-  body {
-    background-color: #F6F6F9;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
 `;
 
 function App() {
