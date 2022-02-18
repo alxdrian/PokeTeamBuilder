@@ -29,7 +29,7 @@ export function colorTypes (type) {
         case 'ice':
           return '#75D0C1'
         case 'dragon':
-          return '#595761'
+          return '#0C69C8'
         case 'dark':
           return '#595761'
         case 'bug':

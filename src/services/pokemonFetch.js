@@ -9,8 +9,8 @@ export const getAllPokemon = () => {
     })
 }
 
-export const getPokemon = (name) => {
-  return axios.get(`pokemon/${name}`)
+export const getPokemon = (id) => {
+  return axios.get(`pokemon/${id}`)
     .then(res => {
       return res.data
     })
