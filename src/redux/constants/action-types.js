@@ -1,0 +1,5 @@
+export const  ActionTypes = {
+   SET_POKEMONS: 'SET_POKEMONS',
+   SET_TEAM: 'SET_TEAM',
+   SET_POKEMON_SELECTED: 'SET_POKEMON_SELECTED',
+};
