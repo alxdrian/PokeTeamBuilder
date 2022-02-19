@@ -13,7 +13,7 @@ export const PageContent = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 10px;
 `;
 
 export const PageSection = styled.div`
@@ -21,7 +21,7 @@ export const PageSection = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
 `;
 
 export const Logo = styled.div`

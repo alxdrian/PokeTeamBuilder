@@ -8,10 +8,12 @@ export const Button = styled.button`
   justify-content: center;
   align-items: center;
   border: none;
-  border-radius: 8px;
+  border-radius: 20px;
   color: #ffff;
   cursor: pointer;
   box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.3);
+  background: #539DDF;
+  color: #ffff;
 
   svg {
     width: 20px;

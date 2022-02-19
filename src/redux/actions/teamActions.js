@@ -1,22 +1,29 @@
 import { ActionTypes } from "../constants/action-types";
 
-export const setTeam = (team) => {
+export const setTeam = (teamName, team) => {
   return {
     type: ActionTypes.SET_TEAM,
-    payload: team,
+    payload: {teamName, team},
   }
 }
 
-export const addToTeam = (pokemon) => {
+export const setTeamName = (teamName) => {
+  return {
+    type: ActionTypes.SET_TEAM_NAME,
+    payload: teamName,
+  }
+}
+
+export const addToTeam = (pokemon, index) => {
   return {
     type: ActionTypes.ADD_TO_TEAM,
-    payload: pokemon,
+    payload: {pokemon, index},
   }
 }
 
-export const removeFromTeam = (pokemon) => {
+export const removeFromTeam = (index) => {
   return {
     type: ActionTypes.REMOVE_FROM_TEAM,
-    payload: pokemon,
+    payload: index,
   }
 }

@@ -7,15 +7,15 @@ import { colorTypes } from "../helpers/colorTypes";
 import pokeball from "../assets/pokeball.png";
 import { removeFromTeam } from "../redux/actions/teamActions";
 
-export function PokeTeamMember ({pokemon}) {
+export function PokeTeamMember ({pokemon, index}) {
   const dispatch = useDispatch();
 
   return (
     <>
-      {pokemon ? 
+      {pokemon !== "" ? 
         <MemberCard
           color={pokemon.types[0].type.name}
-          onClick={() => dispatch(removeFromTeam(pokemon))}
+          onClick={() => dispatch(removeFromTeam(index))}
         >
           <ImageMember>
               <img src={pokemon.sprites.other["official-artwork"].front_default} alt={pokemon.name}/>

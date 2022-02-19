@@ -9,13 +9,15 @@ import { Header } from "../components/UI/Header";
 import pokeball from "../assets/pokeball.png";
 import { PokeDescription } from "../components/PokeDescription";
 import { setPokemons } from "../redux/actions/pokemonActions";
-import { addToTeam } from "../redux/actions/teamActions";
+import { addToTeam, setTeam, setTeamName } from "../redux/actions/teamActions";
+import { Input } from "../components/UI/Input";
 
 function Home() {
   const dispatch = useDispatch();
   const pokemons = useSelector(state => state.pokemons.pokemons);
   const selectedPokemon = useSelector(state => state.pokemons.selectedPokemon);
   const team = useSelector(state => state.team.team);
+  const teamName = useSelector(state => state.team.teamName);
 
   const [pagination, setPagination] = useState(0);
 
@@ -37,7 +39,8 @@ function Home() {
   }
 
   function addPokemonToTeam(data) {
-    team.length <= 5 && dispatch(addToTeam(data))
+    const index = Object.keys(team).find(key => team[key] === "");
+    dispatch(addToTeam(data, index));
   }
 
   return (
@@ -50,13 +53,12 @@ function Home() {
           <PokeDescription pokemon={selectedPokemon}>
           </PokeDescription>
           <PokemonTeam>
-            {team.map(pokemon => (
-              <PokeTeamMember pokemon={pokemon} key={pokemon.name} />
+            {Object.keys(team).map(index => (
+              <PokeTeamMember pokemon={team[index]} key={`member${index}`} index={index} />
             ))}
-            {team.length < 6 && Array(6 - team.length).fill("").map(
-              (item, index) => <PokeTeamMember key={`default${index}`} />
-            )}
           </PokemonTeam>
+          <Input type="text" name="teamName" value={teamName} onChange={e => dispatch(setTeamName(e.target.value))} placeholder={"team name"}></Input>
+          <Button onClick={(e) => dispatch(setTeam(teamName, team))}>SAVE TEAM</Button>
         </PageSection>
         <PageSection>
           <div>
