@@ -2,7 +2,7 @@ import { ActionTypes } from "../constants/action-types";
 
 export const saveTeam = (teamName, team) => {
   return {
-    type: ActionTypes.SET_TEAM,
+    type: ActionTypes.SAVE_TEAM,
     payload: {teamName, team},
   }
 }
@@ -38,6 +38,13 @@ export const setSelectedTeam = (team) => {
 export const deleteTeam = (teamName) => {
   return {
     type: ActionTypes.DELETE_TEAM,
+    payload: teamName,
+  }
+}
+
+export const setPreviousTeamName = (teamName) => {
+  return {
+    type: ActionTypes.SET_PREVIOUS_TEAM_NAME,
     payload: teamName,
   }
 }

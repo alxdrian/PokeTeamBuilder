@@ -2,7 +2,7 @@ import { ActionTypes } from "../constants/action-types";
 
 const initialState = {
   teams: {},
-  team: {
+  selectedTeam: {
     0: "",
     1: "",
     2: "",
@@ -11,6 +11,7 @@ const initialState = {
     5: "",
   },
   teamName: "",
+  previousTeamName: "",
 };
 
 export const teamReducer = (state = initialState, { type, payload }) => {
@@ -18,16 +19,7 @@ export const teamReducer = (state = initialState, { type, payload }) => {
     case ActionTypes.SAVE_TEAM:
       return {
         ...state,
-        teams: {...state.teams, [state.teamName]: payload.team},
-        selectedTeam: {
-            0: "",
-            1: "",
-            2: "",
-            3: "",
-            4: "",
-            5: "",
-          },
-        teamName: ""
+        teams: {...state.teams, [state.teamName]: payload.team}
       };
     case ActionTypes.SET_TEAM_NAME:
       return {
@@ -55,6 +47,11 @@ export const teamReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         teams: newTeams,
+      }
+    case ActionTypes.SET_PREVIOUS_TEAM_NAME:
+      return {
+        ...state,
+        previousTeamName: payload,
       }
     default:
       return state;

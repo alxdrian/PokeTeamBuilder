@@ -7,9 +7,10 @@ import { getAllPokemon } from "../services/pokemonFetch";
 import { PokeTeam } from "../components/PokeTeam";
 import Header from "../components/UI/Header";
 import { PokeDescription } from "../components/PokeDescription";
-import { setPokemons } from "../redux/actions/pokemonActions";
-import { addToTeam, saveTeam, setTeamName } from "../redux/actions/teamActions";
+import { setPokemons, setPokemonSelected } from "../redux/actions/pokemonActions";
+import { addToTeam, saveTeam, deleteTeam, setSelectedTeam, setTeamName } from "../redux/actions/teamActions";
 import { Input } from "../components/UI/Input";
+import { Link } from "react-router-dom";
 
 function TeamEditor() {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ function TeamEditor() {
   const selectedPokemon = useSelector(state => state.pokemons.selectedPokemon);
   const team = useSelector(state => state.team.selectedTeam);
   const teamName = useSelector(state => state.team.teamName);
+  const previousTeamName = useSelector(state => state.team.previousTeamName);
 
   const [pagination, setPagination] = useState(0);
 
@@ -25,7 +27,7 @@ function TeamEditor() {
       const names = await getAllPokemon();
       dispatch(setPokemons(names));
     }
-    fetchData()
+    fetchData();
   }, []);
 
   function handleNext() {
@@ -38,7 +40,19 @@ function TeamEditor() {
 
   function addPokemonToTeam(data) {
     const index = Object.keys(team).find(key => team[key] === "");
-    dispatch(addToTeam(data, index));
+    if (index !==undefined) {
+      dispatch(addToTeam(data, index))
+    }
+  }
+
+  function saveChanges() {
+    if (previousTeamName !== "") {
+      dispatch(deleteTeam(previousTeamName));
+    }
+    dispatch(saveTeam(teamName, team))
+    dispatch(setPokemonSelected(""))
+    dispatch(setTeamName(""))
+    dispatch(setSelectedTeam({0: "",1: "",2: "",3: "",4: "",5: ""}))
   }
 
   return (
@@ -49,7 +63,9 @@ function TeamEditor() {
           <PokeDescription pokemon={selectedPokemon} />
           <PokeTeam team={team} />
           <Input type="text" name="teamName" value={teamName} onChange={e => dispatch(setTeamName(e.target.value))} placeholder={"team name"}></Input>
-          <Button onClick={(e) => dispatch(saveTeam(teamName, team))}>SAVE TEAM</Button>
+          <Link to="/">
+            <Button onClick={saveChanges}>SAVE TEAM</Button>
+          </Link>
         </PageSection>
         <PageSection>
           <div>

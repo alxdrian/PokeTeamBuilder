@@ -6,20 +6,33 @@ import { IconButton } from "./UI/Button"
 import { EditIcon, TrashIcon } from "./UI/Icons"
 import { useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
-import { deleteTeam, setSelectedTeam, setTeamName } from "../redux/actions/teamActions"
+import { deleteTeam, setPreviousTeamName, setSelectedTeam, setTeamName } from "../redux/actions/teamActions"
+import { setPokemonSelected } from "../redux/actions/pokemonActions"
 
 export function PokeTeamList ({teams}) {
   const dispatch = useDispatch()
 
+  function createNewTeam () {
+    dispatch(setPokemonSelected(""))
+    dispatch(setTeamName(""))
+    dispatch(setSelectedTeam({0: "",1: "",2: "",3: "",4: "",5: ""}))
+    dispatch(setPreviousTeamName(""))
+  }
+
   return (
     <TeamList>
-        {Object.keys(teams).map(key => (
+        <Link to="/team-editor">
+          <Container onClick={createNewTeam}><HeadingMedium>CREATE NEW TEAM</HeadingMedium></Container>
+        </Link>
+        {Object.keys(teams).reverse().map(key => (
           <Container key={`team-${key}`} >
             <HeadingMedium>{key}</HeadingMedium>
             <Link to="team-editor">
               <EditButton onClick={() => {
+                dispatch(setPokemonSelected(""))
                 dispatch(setSelectedTeam(teams[key]))
                 dispatch(setTeamName(key))
+                dispatch(setPreviousTeamName(key))
               }}>
                 <EditIcon/>
               </EditButton>
