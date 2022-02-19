@@ -14,7 +14,6 @@ const cssGlobal = css`
   body {
     height: 100vh;
     background: url(${pokedex});
-    background-size: fit;
     background-position: center;
     background-repeat: no-repeat;
     display: flex;

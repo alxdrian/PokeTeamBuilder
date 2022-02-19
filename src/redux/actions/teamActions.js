@@ -6,3 +6,17 @@ export const setTeam = (team) => {
     payload: team,
   }
 }
+
+export const addToTeam = (pokemon) => {
+  return {
+    type: ActionTypes.ADD_TO_TEAM,
+    payload: pokemon,
+  }
+}
+
+export const removeFromTeam = (pokemon) => {
+  return {
+    type: ActionTypes.REMOVE_FROM_TEAM,
+    payload: pokemon,
+  }
+}

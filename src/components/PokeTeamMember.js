@@ -1,19 +1,26 @@
 import styled from "@emotion/styled";
+import { useDispatch } from "react-redux";
 import { PokeImage } from "./PokeEntry";
 import { Card } from "./UI/Card";
 import { ContentXSmall } from "./UI/Text";
 import { colorTypes } from "../helpers/colorTypes";
 import pokeball from "../assets/pokeball.png";
+import { removeFromTeam } from "../redux/actions/teamActions";
 
 export function PokeTeamMember ({pokemon}) {
+  const dispatch = useDispatch();
+
   return (
     <>
       {pokemon ? 
-        <MemberCard color={pokemon.types[0].type.name}>
-        <ImageMember>
-            <img src={pokemon.sprites.other["official-artwork"].front_default} alt={pokemon.name}/>
-        </ImageMember>
-        <ContentXSmall>{pokemon.name}</ContentXSmall>
+        <MemberCard
+          color={pokemon.types[0].type.name}
+          onClick={() => dispatch(removeFromTeam(pokemon))}
+        >
+          <ImageMember>
+              <img src={pokemon.sprites.other["official-artwork"].front_default} alt={pokemon.name}/>
+          </ImageMember>
+            <ContentXSmall>{pokemon.name}</ContentXSmall>   
         </MemberCard> : 
         <DefaultCard>
             <img src={pokeball} alt="pokeball"/>

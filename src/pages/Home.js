@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Page, PageContent, Logo, PokeDex, PokemonTeam, PageSection } from "../components/UI/Container";
 import { PokeEntry } from "../components/PokeEntry";
 import { Button } from "../components/UI/Button";
@@ -7,17 +8,22 @@ import { PokeTeamMember } from "../components/PokeTeamMember";
 import { Header } from "../components/UI/Header";
 import pokeball from "../assets/pokeball.png";
 import { PokeDescription } from "../components/PokeDescription";
+import { setPokemons } from "../redux/actions/pokemonActions";
+import { addToTeam } from "../redux/actions/teamActions";
 
 function Home() {
-  const [pokemonData, setPokemonData] = useState([]);
+  const dispatch = useDispatch();
+  const pokemons = useSelector(state => state.pokemons.pokemons);
+  const selectedPokemon = useSelector(state => state.pokemons.selectedPokemon);
+  const team = useSelector(state => state.team.team);
+
   const [pagination, setPagination] = useState(0);
-  const [team, setTeam] = useState([]);
-  const [selectedPokemon, setSelectedPokemon] = useState({});
+
 
   useEffect(() => {
     const fetchData = async () => {
       const names = await getAllPokemon();
-      setPokemonData(names)
+      dispatch(setPokemons(names));
     }
     fetchData()
   }, []);
@@ -30,8 +36,8 @@ function Home() {
     pagination > 0 && setPagination(pagination - 20)
   }
 
-  function addToTeam(data) {
-    team.length <= 5 && setTeam([...team, data])
+  function addPokemonToTeam(data) {
+    team.length <= 5 && dispatch(addToTeam(data))
   }
 
   return (
@@ -58,13 +64,12 @@ function Home() {
             <Button onClick={handleNext}>siguiente</Button>
           </div>
           <PokeDex>
-            {pokemonData.slice(pagination, pagination + 20).map(pokemon => (
+            {pokemons.slice(pagination, pagination + 20).map(pokemon => (
               <PokeEntry
                 key={pokemon.name}
                 name={pokemon.name}
-                addToTeam={addToTeam}
+                addToTeam={addPokemonToTeam}
                 team={team}
-                setSelectedPokemon={setSelectedPokemon}
                 />
             ))}
           </PokeDex>

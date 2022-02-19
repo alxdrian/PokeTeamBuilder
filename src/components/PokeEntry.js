@@ -1,13 +1,16 @@
 import styled from '@emotion/styled'
 import { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { ContentXSmall, HeadingSmall } from './UI/Text'
 import { Card } from './UI/Card'
 import { colorTypes } from '../helpers/colorTypes'
 import { getPokemon } from '../services/pokemonFetch'
 import { PlusIcon } from './UI/Icons'
 import { IconButton } from './UI/Button'
+import { setPokemonSelected } from '../redux/actions/pokemonActions'
 
-export function PokeEntry ({name,addToTeam, setSelectedPokemon}) {
+export function PokeEntry ({name, addToTeam }) {
+  const dispatch = useDispatch()
   const [data, setData] = useState({})
 
   useEffect(() => {
@@ -28,7 +31,7 @@ export function PokeEntry ({name,addToTeam, setSelectedPokemon}) {
 
   return (
     <DexCard
-      onClick={() => setSelectedPokemon(data)}
+      onClick={() => dispatch(setPokemonSelected(data))}
     >
       {data.sprites ? 
         <PokeImage color={data.types[0].type.name}>
