@@ -24,38 +24,28 @@ export const PageSection = styled.div`
   gap: 10px;
 `;
 
-export const Logo = styled.div`
-  height: 40px;
-  width: 40px;
-  img {
-    height: 100%;
-    width: 100%;
-    object-fit: contain;
-  }
-`;
-
 export const Container = styled.div`
   display: flex;
+  background-color: #f6f6f954;
   flex-direction: row;
   flex-wrap: wrap;
   border-radius: 8px;
-  padding: 5px;
-  gap: 5px;
+  padding: 10px;
+  gap: 10px;
   box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.3);
-
-  @media (min-width: 768px) {
-    gap: 10px;
-    padding: 20px;
-  }
+  position: relative;
+  justify-content: center;
 `;
 
 export const PokeDex = styled(Container)`
-  background-color: #f6f6f954;
   justify-content: center;
 `;
 
 export const PokemonTeam = styled(Container)`
-  background: #f6f6f954;
   justify-content: center;
   width: fit-content;
+`;
+
+export const TeamList = styled(Container)`
+  flex-direction: column;
 `;

@@ -1,6 +1,15 @@
 import styled from "@emotion/styled";
+import pokeball from "../../assets/pokeball.png";
 
-export const Header = styled.header`;
+function Header () {
+  return (
+    <HeaderContainer>
+      <Logo><img src={pokeball} alt={"logo"}/></Logo>
+    </HeaderContainer>
+  )
+}
+
+const HeaderContainer = styled.header`;
   display: flex;
   width: calc(100% - 60px);
   padding: 10px 30px;
@@ -16,3 +25,15 @@ export const Header = styled.header`;
     width: calc(100% - 20px);
   }
 `;
+
+const Logo = styled.div`
+  height: 40px;
+  width: 40px;
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+  }
+`;
+
+export default Header;
