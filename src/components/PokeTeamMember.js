@@ -43,7 +43,7 @@ const MemberCard = styled(Card)`
     font-weight: bold;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 600px) {
     width: 90px;
     height: 70px;
     gap: 0;

@@ -11,9 +11,6 @@ function Home () {
       <Header />
       <PageContent>
         <PageSection>
-          random pokemon
-        </PageSection>
-        <PageSection>
           <PokeTeamList teams={teams} />
         </PageSection>
       </PageContent>

@@ -1,7 +1,7 @@
 import styled from "@emotion/styled"
 
 export const Input = styled.input`
-    height: 30px;
+    height: 40px;
     background: #f6f6f987;
     border: none;
     border-bottom: 2px solid #539DDF;
@@ -15,5 +15,9 @@ export const Input = styled.input`
       background: #539DDF;
       color: #ffff;
       border-bottom: 2px solid #ffff;
+    }
+
+    @media (max-width: 600px) {
+        height: 30px;
     }
 `;

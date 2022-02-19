@@ -13,7 +13,6 @@ export const Button = styled.button`
   cursor: pointer;
   box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.3);
   background: #539DDF;
-  color: #ffff;
 
   svg {
     width: 20px;
@@ -22,15 +21,14 @@ export const Button = styled.button`
 `;
 
 export const IconButton = styled(Button)`
-  width: 35px;
-  height: 35px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  position: absolute;
-  padding: 2px;
+  padding: 0;
 
-  @media (max-width: 768px) {
-    height: 25px;
-    width: 25px;
+  @media (max-width: 600px) {
+    height: 30px;
+    width: 30px;
   }
 
   :hover {

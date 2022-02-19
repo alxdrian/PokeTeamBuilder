@@ -64,7 +64,7 @@ const DexCard = styled(Card)`
   width: 90px;
   background: rgb(255 255 255 / 75%);
 
-  @media (min-width: 768px) {
+  @media (min-width: 600px) {
     width: 140px;
   }
 
@@ -82,6 +82,7 @@ export const PokeImage = styled.div`
   display: flex;
   justify-content: center; 
   align-items: center;
+  height: 60px;
 
   img {
     height: 95%;
@@ -89,9 +90,8 @@ export const PokeImage = styled.div`
     object-fit: contain;
   }
 
-  @media (max-width: 768px) {
-    height: 60px;
-  }
+    
+  
 `
 
 export const Description = styled.div`
@@ -101,7 +101,7 @@ export const Description = styled.div`
   gap: 3px;
   position: relative;
 
-  @media (min-width: 768px) {
+  @media (min-width: 600px) {
     gap: 5px;
     padding: 5px;
   }
@@ -112,7 +112,7 @@ export const TypesList = styled.div`
   flex-direction: row;
   gap: 2px;
 
-  @media (min-width: 768px) {
+  @media (min-width: 600px) {
     gap: 10px;
   }
 `
@@ -128,7 +128,7 @@ export const Type = styled.div`
   text-align: center;
   background: ${props => props.color && colorTypes(props.color)};
 
-  @media (min-width: 768px) {
+  @media (min-width: 600px) {
     width: 60px;
     height: 12px;
   }
@@ -136,10 +136,13 @@ export const Type = styled.div`
 
 const AddToTeamButton = styled(IconButton)`
   background: ${props => props.color && colorTypes(props.color)};
-  right: 5px;
-  top: -15px;
+  position: absolute;
+  right: 0;
+  top: -20px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 600px) {
+    height: 20px;
+    width: 20px;
     right: 3px;
     top: -12px;
   }

@@ -1,9 +1,9 @@
 import styled from "@emotion/styled"
-import { Container, TeamList } from "./UI/Container"
+import { ButtonContainer, Container, TeamList } from "./UI/Container"
 import { HeadingMedium } from "./UI/Text"
 import { PokeTeam } from "./PokeTeam"
 import { IconButton } from "./UI/Button"
-import { EditIcon, TrashIcon } from "./UI/Icons"
+import { EditIcon, PlusIcon, TrashIcon } from "./UI/Icons"
 import { useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
 import { deleteTeam, setPreviousTeamName, setSelectedTeam, setTeamName } from "../redux/actions/teamActions"
@@ -21,25 +21,32 @@ export function PokeTeamList ({teams}) {
 
   return (
     <TeamList>
-        <Link to="/team-editor">
-          <Container onClick={createNewTeam}><HeadingMedium>CREATE NEW TEAM</HeadingMedium></Container>
-        </Link>
-        {Object.keys(teams).reverse().map(key => (
-          <Container key={`team-${key}`} >
-            <HeadingMedium>{key}</HeadingMedium>
-            <Link to="team-editor">
-              <EditButton onClick={() => {
-                dispatch(setPokemonSelected(""))
-                dispatch(setSelectedTeam(teams[key]))
-                dispatch(setTeamName(key))
-                dispatch(setPreviousTeamName(key))
-              }}>
-                <EditIcon/>
-              </EditButton>
+        <Container>
+            <HeadingMedium>TEAMS</HeadingMedium>
+            <Link to="/team-editor">
+                <IconButton onClick={createNewTeam}><PlusIcon /></IconButton>
             </Link>
-            <DeleteButton onClick={()=> dispatch(deleteTeam(key))}><TrashIcon/></DeleteButton>
+        </Container>
+        {Object.keys(teams).reverse().map(key => (
+          <div key={`team-${key}`} >
+            <Container>
+                <HeadingMedium>{key}</HeadingMedium>
+                <ButtonContainer>
+                <Link to="team-editor">
+                    <EditButton onClick={() => {
+                        dispatch(setPokemonSelected(""))
+                        dispatch(setSelectedTeam(teams[key]))
+                        dispatch(setTeamName(key))
+                        dispatch(setPreviousTeamName(key))
+                    }}>
+                        <EditIcon/>
+                    </EditButton>
+                </Link>
+                <DeleteButton onClick={()=> dispatch(deleteTeam(key))}><TrashIcon/></DeleteButton>
+                </ButtonContainer>
+            </Container>
             <PokeTeam team={teams[key]} />
-          </Container>  
+          </div>  
         ))}
     </TeamList>
   )
