@@ -34,3 +34,10 @@ export const setSelectedTeam = (team) => {
     payload: team,
   }
 }
+
+export const deleteTeam = (teamName) => {
+  return {
+    type: ActionTypes.DELETE_TEAM,
+    payload: teamName,
+  }
+}

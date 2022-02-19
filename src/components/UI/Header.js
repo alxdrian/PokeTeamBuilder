@@ -1,10 +1,13 @@
 import styled from "@emotion/styled";
+import { Link } from "react-router-dom";
 import pokeball from "../../assets/pokeball.png";
 
 function Header () {
   return (
     <HeaderContainer>
-      <Logo><img src={pokeball} alt={"logo"}/></Logo>
+      <Link to="/">
+        <Logo><img src={pokeball} alt={"logo"}/></Logo>
+      </Link>
     </HeaderContainer>
   )
 }

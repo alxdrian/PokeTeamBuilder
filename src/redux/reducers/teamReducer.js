@@ -49,6 +49,13 @@ export const teamReducer = (state = initialState, { type, payload }) => {
         ...state,
         selectedTeam: payload,
       };
+    case ActionTypes.DELETE_TEAM:
+      const newTeams = {...state.teams};
+      delete newTeams[payload];
+      return {
+        ...state,
+        teams: newTeams,
+      }
     default:
       return state;
   }

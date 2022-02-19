@@ -6,7 +6,7 @@ import { IconButton } from "./UI/Button"
 import { EditIcon, TrashIcon } from "./UI/Icons"
 import { useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
-import { setSelectedTeam, setTeamName } from "../redux/actions/teamActions"
+import { deleteTeam, setSelectedTeam, setTeamName } from "../redux/actions/teamActions"
 
 export function PokeTeamList ({teams}) {
   const dispatch = useDispatch()
@@ -24,7 +24,7 @@ export function PokeTeamList ({teams}) {
                 <EditIcon/>
               </EditButton>
             </Link>
-            <DeleteButton><TrashIcon/></DeleteButton>
+            <DeleteButton onClick={()=> dispatch(deleteTeam(key))}><TrashIcon/></DeleteButton>
             <PokeTeam team={teams[key]} />
           </Container>  
         ))}
