@@ -32,7 +32,7 @@ export function PokeTeamMember ({pokemon, index}) {
 
 const MemberCard = styled(Card)`
   width: 100px;
-  height: 100px;
+  height: 80px;
   color: black;
   background: ${props => props.color && colorTypes(props.color)};
   text-align: center;

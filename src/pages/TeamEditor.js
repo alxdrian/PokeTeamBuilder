@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Page, PageContent, PokeDex, PageSection, Container, ButtonContainer } from "../components/UI/Container";
 import { PokeEntry } from "../components/PokeEntry";
-import { Button, IconButton } from "../components/UI/Button";
+import { IconButton } from "../components/UI/Button";
 import { getAllPokemon } from "../services/pokemonFetch";
 import { PokeTeam } from "../components/PokeTeam";
 import Header from "../components/UI/Header";

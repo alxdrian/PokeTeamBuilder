@@ -51,6 +51,11 @@ export const PokemonTeam = styled(Container)`
 
 export const TeamList = styled(Container)`
   flex-direction: column;
+  min-width: 670px;
+
+  @media (max-width: 768px) {
+    min-width: 320px;
+  } 
 `;
 
 export const ButtonContainer = styled.div`

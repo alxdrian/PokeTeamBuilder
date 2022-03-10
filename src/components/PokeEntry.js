@@ -19,10 +19,6 @@ export function PokeEntry ({name, addToTeam }) {
       setData(pokemon)
     }
     fetchData()
-
-    return {
-      data
-    }
   }, []);
 
   function handleAddToTeam() {
@@ -89,9 +85,6 @@ export const PokeImage = styled.div`
     width: 60%;
     object-fit: contain;
   }
-
-    
-  
 `
 
 export const Description = styled.div`
