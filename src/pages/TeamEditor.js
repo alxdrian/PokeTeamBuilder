@@ -31,7 +31,7 @@ function TeamEditor() {
       dispatch(setPokemons(names));
     }
     fetchData();
-  }, []);
+  }, [dispatch]);
 
   function handleNext() {
     pagination + 12 < 890 && setPagination(pagination + 12)

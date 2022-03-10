@@ -19,7 +19,7 @@ export function PokeEntry ({name, addToTeam }) {
       setData(pokemon)
     }
     fetchData()
-  }, []);
+  }, [name]);
 
   function handleAddToTeam() {
     addToTeam(data)
